@@ -1,0 +1,113 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="description"
+      content="A GenLayer prototype for resolving validator downtime/slashing insurance claims using public outage evidence."
+    />
+    <meta property="og:title" content="SlashShield — GenLayer Validator Downtime Insurance Demo" />
+    <meta
+      property="og:description"
+      content="A GenLayer prototype for resolving validator downtime/slashing insurance claims using public outage evidence."
+    />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://slashshield.vercel.app/" />
+    <meta name="twitter:card" content="summary" />
+    <meta name="twitter:title" content="SlashShield — GenLayer Validator Downtime Insurance Demo" />
+    <meta
+      name="twitter:description"
+      content="A GenLayer prototype for resolving validator downtime/slashing insurance claims using public outage evidence."
+    />
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <title>SlashShield — GenLayer Validator Downtime Insurance Demo</title>
+  </head>
+  <body>
+    <div id="root"></div>
+    <noscript>
+      <main>
+        <h1>SlashShield</h1>
+        <h2>Validator downtime claims, resolved with GenLayer evidence reasoning.</h2>
+        <p>
+          A prototype claim console that checks whether provider outage evidence qualifies a
+          slashing/downtime claim for payout eligibility.
+        </p>
+        <section>
+          <h2>Claim Console</h2>
+          <p>
+            The /claim route contains two selectable demo scenarios, policy details, evidence links,
+            a GenLayer reasoning checklist, and structured JSON-like decision output.
+          </p>
+        </section>
+        <section>
+          <h2>What this is</h2>
+          <ul>
+            <li>GenLayer prototype for validator downtime/slashing claim decisions.</li>
+            <li>Evidence-based policy flow with structured JSON output.</li>
+            <li>Two clear outcomes: provider outage APPROVED and operator maintenance REJECTED.</li>
+          </ul>
+        </section>
+        <section>
+          <h2>What this is not</h2>
+          <ul>
+            <li>Not real-money insurance.</li>
+            <li>Not connected to live validator feeds.</li>
+            <li>Not production settlement.</li>
+            <li>Not legal or financial advice.</li>
+          </ul>
+        </section>
+        <section>
+          <h2>Why this needs GenLayer</h2>
+          <p>
+            Outage reports and operator notes are natural-language evidence, not clean oracle ticks.
+            The decision depends on provider, region, time overlap, and policy exclusions together.
+            GenLayer returns a bounded structured result that the claim console can render.
+          </p>
+        </section>
+        <section>
+          <h2>Policy schema</h2>
+          <pre>{
+  "operator": "validator operator submitting the claim",
+  "provider": "covered infrastructure provider, e.g. AWS",
+  "region": "covered provider region, e.g. us-east-1",
+  "coverage_window": "slashing/downtime window that evidence must overlap",
+  "max_payout": "maximum prototype payout eligibility for the claim",
+  "exclusions": ["operator maintenance", "key compromise", "double signing", "unpaid premium"]
+}</pre>
+        </section>
+        <section>
+          <h2>Claim flow</h2>
+          <p>Policy → Claim → Evidence → GenLayer reasoning → Decision → Payout eligibility.</p>
+        </section>
+        <section>
+          <h2>Demo scenarios</h2>
+          <p>Provider outage claim: expected and actual decision APPROVED; provider_match true; region_match true; time_overlap true; exclusion_detected false; payout_allowed true.</p>
+          <p>Operator maintenance claim: expected and actual decision REJECTED; provider_match true; region_match true; time_overlap true; exclusion_detected true; payout_allowed false.</p>
+        </section>
+        <section>
+          <h2>Evidence links</h2>
+          <p>Provider outage evidence: https://slashshield.vercel.app/evidence/aws-us-east-1-incident</p>
+          <p>Operator maintenance evidence: https://slashshield.vercel.app/evidence/operator-maintenance</p>
+        </section>
+        <section>
+          <h2>Structured decision output</h2>
+          <pre>{
+  "decision": "APPROVED or REJECTED",
+  "provider_match": true,
+  "region_match": true,
+  "time_overlap": true,
+  "exclusion_detected": false,
+  "payout_allowed": true,
+  "reason": "GenLayer evidence reasoning summary"
+}</pre>
+        </section>
+        <section>
+          <h2>Current limitations</h2>
+          <p>Prototype only; no real-money insurance product. Validator feeds are not connected. Production settlement is not claimed.</p>
+        </section>
+      </main>
+    </noscript>
+    <script type="module" src="/src/main.tsx"></script>
+  </body>
+</html>

@@ -1,0 +1,16 @@
+node_modules/
+dist/
+output/
+.playwright-cli/
+*.tsbuildinfo
+.DS_Store
+.vercel
+.env
+.env.*
+*.log
+*.local
+coverage/
+playwright-report/
+test-results/
+__pycache__/
+*.py[cod]
