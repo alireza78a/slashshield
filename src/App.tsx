@@ -161,7 +161,7 @@ const RPC_URL = GENLAYER_WALLET_RPC_ENDPOINT;
 const READ_RPC_URL = GENLAYER_EFFECTIVE_RPC_ENDPOINT;
 const PUBLIC_APP_URL = "https://slashshield.vercel.app";
 const DISPLAY_NETWORK_LABEL = GENLAYER_NETWORK_LABEL.replace(/^Genlayer\b/, "GenLayer");
-const NETWORK_PAGE_TITLE = DISPLAY_NETWORK_LABEL.toLowerCase().includes("network")
+const NETWORK_PAGE_TITLE = /\b(network|testnet|mainnet)\b/i.test(DISPLAY_NETWORK_LABEL)
   ? DISPLAY_NETWORK_LABEL
   : `${DISPLAY_NETWORK_LABEL} network`;
 const WALLET_REQUEST_TIMEOUT_MS = 30_000;
@@ -851,7 +851,7 @@ function HomePage() {
             </div>
             <p>
               They’re messy English from AWS status pages and operator changelogs.
-              A normal contract can’t tell the difference between <em>“us-east-1 EBS degraded”</em>
+              A normal contract can’t tell the difference between <em>“us-east-1 EBS degraded”</em>{" "}
               and <em>“scheduled key rotation”</em>. GenLayer can.
             </p>
           </div>
@@ -2148,7 +2148,7 @@ function EvidenceDetailPage({ scenarioKey }: { scenarioKey: ScenarioKey }) {
           <aside className="evidence-side-rail">
             <section className="evidence-run-card">
               <span>Run on this evidence</span>
-              <p>Open the claim console with this evidence pre-attached. GenLayer will produce a verdict from the deployed contract path.</p>
+              <p>Open the claim console with this evidence pre-attached and review it through the deployed contract path.</p>
               <a className="btn primary" href={`/claim?scenario=${scenarioKey}`}>Run in console <ArrowUpRight size={14} /></a>
             </section>
             <section className="evidence-side-card">
